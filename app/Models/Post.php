@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model{
 
+        protected $with = ['category', 'user'];
 
         public static function some(){
 
@@ -28,6 +29,11 @@ class Post extends Model{
 
             return $this->belongsTo( Category::class );
 
+        }
+
+        public function user(){
+
+            return $this->belongsTo(User::class);
         }
 
         

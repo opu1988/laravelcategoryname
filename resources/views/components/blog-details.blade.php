@@ -6,14 +6,14 @@
                         <div class="blog-image">
                             <img src="{{ $data->thumbnail }}" alt="">
                             <div class="blog-date">
-                                <h5 class="title">14</h5>
-                                <span>oct</span>
+                                <h5 class="title">{{ date ("d", strtotime( $data->created_at) ) }}</h5>
+                                <span>{{ date ("F", strtotime( $data->created_at) ) }}</span>
                             </div>
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-user-o"></i>john doe</a></li>
+                                    <li><a href="#"><i class="fa fa-user-o"></i>{{ $data->user->name }}</a></li>
                                     <li><a href="/category/{{ $category->slug }}"><i class="fa fa-bookmark-o"></i>{{ $category->name }}</a></li>
                                 </ul>
                             </div>
@@ -99,8 +99,8 @@
                             <div class="widget-title">
                                 <h4 class="title">search</h4>
                             </div>
-                            <form action="#">
-                                <input type="text" placeholder="Search" class="input-shape">
+                            <form action="{{ route('blog') }}">
+                                <input type="text" name="search" placeholder="Search" class="input-shape">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="single-post-content">
                                     <a href="#">about app development</a>
-                                    <span>14 Oct 2020</span>
+                                    <span>{{ date ("d F", strtotime( $data->created_at) ) }}</span>
                                 </div>
                             </div>
                             <div class="single-post">
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="single-post-content">
                                     <a href="#">learn SQA</a>
-                                    <span>14 Oct 2020</span>
+                                    <span>{{ date ("d F", strtotime( $data->created_at) ) }}</span>
                                 </div>
                             </div>
                             <div class="single-post">
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="single-post-content">
                                     <a href="#">digital marketing tools</a>
-                                    <span>14 Oct 2020</span>
+                                    <span>{{ date ("d F", strtotime( $data->created_at) ) }}</span>
                                 </div>
                             </div>
                         </div>

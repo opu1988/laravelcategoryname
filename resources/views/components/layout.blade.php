@@ -10,7 +10,7 @@
     <title>Cropium Portfolio Template</title>
 
     <!-- Favicon Icon -->
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
 
     <!-- CSS StyleSheet -->
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
@@ -46,7 +46,7 @@
                             <div class="responsive-mobile-menu">
                                 <div class="logo-wrapper">
                                     <a href="index" class="logo">
-                                        <img src="assets/images/logo.png" alt="logo">
+                                        <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
                                     </a>
                                 </div>
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cropium-main-menu" 
@@ -115,7 +115,7 @@
         <div class="container">
             <div class="call-to-action-bg">
                 <div class="call-to-action-shape">
-                    <img src="assets/images/award-shape.png" alt="">
+                    <img src="{{ asset('assets/images/award-shape.png') }}" alt="">
                 </div>
                 <div class="call-to-action-content">
                     <div class="call-to-action-title">
@@ -137,7 +137,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="footer-logo">
-                            <a href="#"><img src="assets/images/logo.png" alt="logo"></a>
+                            <a href="#"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-md-9">

@@ -7,6 +7,8 @@
 
                
                 <div class="col-lg-8">
+
+                     @if($posts->count() > 0 )
                     @foreach($posts as $post)
                         <article class="cropium-blog-item">
                             <div class="blog-image">
@@ -19,7 +21,7 @@
                             <div class="blog-content">
                                 <div class="blog-meta">
                                     <ul>
-                                        <li><a href="#"><i class="fa fa-user-o"></i>john doe</a></li>
+                                        <li><a href="/users/{{ $post->user->username }}"><i class="fa fa-user-o"></i>{{ $post->user->name }}</a></li>
                                         <li><a href="/category/{{ $post->category->slug }}"><i class="fa fa-bookmark-o"></i>{{ $post->category->name }}</a></li>
                                     </ul>
                                 </div>
@@ -29,6 +31,12 @@
                         </article>
 
                     @endforeach
+
+                    @else
+
+                    <h1>No Posts Found check letter</h1>
+
+                    @endif
                     
                 </div>
                 <!-- Blog Sidebar Starts -->
@@ -48,33 +56,18 @@
                             <div class="widget-title">
                                 <h4 class="title">recent posts</h4>
                             </div>
-                            <div class="single-post">
-                                <div class="single-post-image">
-                                    <img src="assets/images/recent-post-1.jpg" alt="">
+                            @foreach($posts as $post)
+
+                                <div class="single-post">
+                                    <div class="single-post-image">
+                                        <img src="assets/images/recent-post-2.jpg" alt="">
+                                    </div>
+                                    <div class="single-post-content">
+                                        <a href="#">learn SQA</a>
+                                        <span>{{ date ("d F", strtotime( $post->created_at) ) }}</span>
+                                    </div>
                                 </div>
-                                <div class="single-post-content">
-                                    <a href="#">about app development</a>
-                                    <span>{{ date ("d F", strtotime( $post->created_at) ) }}</span>
-                                </div>
-                            </div>
-                            <div class="single-post">
-                                <div class="single-post-image">
-                                    <img src="assets/images/recent-post-2.jpg" alt="">
-                                </div>
-                                <div class="single-post-content">
-                                    <a href="#">learn SQA</a>
-                                    <span>{{ date ("d F", strtotime( $post->created_at) ) }}</span>
-                                </div>
-                            </div>
-                            <div class="single-post">
-                                <div class="single-post-image">
-                                    <img src="assets/images/recent-post-3.jpg" alt="">
-                                </div>
-                                <div class="single-post-content">
-                                    <a href="#">digital marketing tools</a>
-                                    <span>{{ date ("d F", strtotime( $post->created_at) ) }}</span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
 
                         <div class="widget-social-links widget-style">

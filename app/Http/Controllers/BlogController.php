@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 
 
 
@@ -15,17 +16,28 @@ class BlogController extends Controller
 {
     public function index(){
 
+        $search = request('search');
+
         $posts = cache()->remember('posts', now()->addMinutes(2), function(){
 
            return  $post = Post::with('category')->paginate(5);
-        }); 
+        });
+        
+        
         return view('pages.blog',[
 
-            'posts' => Post::some(),
+            'posts' => Post::with('category', 'user')
+                ->where('title', 'like', '%' .$search. '%')
+                ->orWhere('content', 'like', '%' .$search. '%')
+                ->get(),
             'title' => "Blog",
             // compact('posts')
         ]);
     }
+
+
+
+    
 
 
     
@@ -64,17 +76,27 @@ class BlogController extends Controller
     }
 
 
-    public function categoryWisePosts($id){
+    public function categoryWisePosts(Category $category){
         
-
         return view('pages.category', [
 
-            'title' => 'Category',
-            'posts' => Post::where('category_id', $id)->get()
+            'title' => $category->name,
+            'posts' => $category->posts
         ]);
     }
 
-    
+    public function userBasedPost(User  $user){
+
+        return view ('pages.user-post', [
+
+            'title' => $user->name,
+            'posts' => $user->posts
+
+            
+        ]);
+    }
+
+        
 
 }
 
