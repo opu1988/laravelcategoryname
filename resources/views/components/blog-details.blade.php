@@ -39,7 +39,7 @@
                             <li>
                                 <div class="single-comment-list">
                                     <div class="list-image">
-                                        <img src="assets/images/comment-1.jpg" alt="author">
+                                        <img src="{{ asset('assets/images/comment-1.jpg') }}" alt="author">
                                     </div>
                                     <div class="list-content">
                                         <h5 class="title">john doe</h5>
@@ -51,7 +51,7 @@
                             <li>
                                 <div class="single-comment-list">
                                     <div class="list-image">
-                                        <img src="assets/images/comment-2.jpg" alt="author">
+                                        <img src="{{ asset('assets/images/comment-2.jpg') }}" alt="author">
                                     </div>
                                     <div class="list-content">
                                         <h5 class="title">devid warner</h5>
@@ -63,7 +63,7 @@
                             <li>
                                 <div class="single-comment-list single-comment-list-02">
                                     <div class="list-image">
-                                        <img src="assets/images/comment-3.jpg" alt="author">
+                                        <img src="{{ asset('assets/images/comment-3.jpg') }}" alt="author">
                                     </div>
                                     <div class="list-content">
                                         <h5 class="title">jon snow</h5>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="single-post">
                                 <div class="single-post-image">
-                                    <img src="assets/images/recent-post-1.jpg" alt="">
+                                    <img src="{{ asset('assets/images/recent-post-1.jpg') }}" alt="">
                                 </div>
                                 <div class="single-post-content">
                                     <a href="#">about app development</a>
@@ -120,7 +120,7 @@
                             </div>
                             <div class="single-post">
                                 <div class="single-post-image">
-                                    <img src="assets/images/recent-post-2.jpg" alt="">
+                                    <img src="{{ asset('assets/images/recent-post-2.jpg') }}" alt="">
                                 </div>
                                 <div class="single-post-content">
                                     <a href="#">learn SQA</a>
@@ -129,7 +129,7 @@
                             </div>
                             <div class="single-post">
                                 <div class="single-post-image">
-                                    <img src="assets/images/recent-post-3.jpg" alt="">
+                                    <img src="{{ asset('assets/images/recent-post-3.jpg') }}" alt="">
                                 </div>
                                 <div class="single-post-content">
                                     <a href="#">digital marketing tools</a>

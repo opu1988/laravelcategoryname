@@ -5,8 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controller\PostController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 
 /*
@@ -82,16 +83,37 @@ Route::get("/services", function(){
 
 //Post Controller 
 
-Route::get("/posts", [PostController::class, 'index']);
+Route::get("/admin/posts", [PostController::class, 'index'])->name('admin-posts');
 
-Route::get("/create-post", [PostController::class, 'create']);
+Route::get("/admin/posts/create", [PostController::class, 'create'])->name('admin.post.create');
+
+Route::post('/admin/posts/store', [PostController::class, 'store'])->name('admin.post.store');
+
+Route::get("/admin/posts/edit/{post}", [PostController::class, 'edit'])->name('admin.post.edit');
+
+Route::put('/admin/posts/update/{post}', [PostController::class, 'update'])->name('admin.post.update');
 
 
-Route::get("/update-post", [PostController::class, 'edit']);
+
+Route::delete("/admin/posts/delete/{post}", [PostController::class, 'destroy'])->name('admin.post.delete');
 
 
+Route::get('/test-upload', function(){
 
-Route::get("/delete-post", [PostController::class, 'destroy']);
+
+    return view('upload-image');
+});
+
+Route::post('test-upload', function(Request $request){
+
+    $image = $request->file('thumbnail');
+
+    $image_name = $image->hashname();
+
+    $image->storeAs('/public/images', $image_name);
+
+    return "image upload hoice";
+})->name('upload-image');
 
 
 Route::get('/article{slug}', function($slug){
@@ -146,17 +168,18 @@ Route::get('search-page', function(){
 // Registration and login routes 
 
 
-Route::get('register', [LoginController::class, 'register'])->name('register');
+Route::get('register', [LoginController::class, 'register'])->name('register')->middleware('guest');
 
 
 
 Route::post('register', [LoginController::class, 'registerPost'])->name('registerProcess');
 
-Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::get('login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'loginPost'])->name('loginProcess');
 
-Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
-Route::get('logout', [LoginController::class, 'logout']);
+Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
 
 
 

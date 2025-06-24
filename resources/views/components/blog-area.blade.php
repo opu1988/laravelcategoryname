@@ -60,7 +60,7 @@
 
                                 <div class="single-post">
                                     <div class="single-post-image">
-                                        <img src="assets/images/recent-post-2.jpg" alt="">
+                                        <img src="{{asset('assets/images/recent-post-2.jpg')}}" alt="">
                                     </div>
                                     <div class="single-post-content">
                                         <a href="#">learn SQA</a>
@@ -68,7 +68,11 @@
                                     </div>
                                 </div>
                             @endforeach
+
+                            
+                            
                         </div>
+                        @include('components.pagination')
 
                         <div class="widget-social-links widget-style">
                             <div class="widget-title">
@@ -113,9 +117,8 @@
             <!-- Blog Pagination Starts -->
             <div class="row order-md-1">
                 <div class="col-lg-12">
-                    <div class="cropium-blog-pagination">
-                        
-
+                    
+                    @include('components.pagination')
                     
                 </div>
             </div>

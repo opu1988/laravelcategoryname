@@ -34,9 +34,17 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
 
-        $user = $this->generate($info);
+        // $user = $this->generate($info);
 
-        return redirect('/register')->with('message', 'Registration Successfully');
+        
+
+        if($user = User::create($info)){
+
+            Auth::login($user);
+            return redirect('/dashboard')->with('message', 'Registration Successfully');
+        }
+
+        
 
     }
 
@@ -60,7 +68,7 @@ class LoginController extends Controller
     public function dashboard(){
 
         
-        return view('authentication.dashboard', [
+        return view('admin.dashboard', [
 
             'title' => "Dashboard"
         ]);
@@ -84,9 +92,9 @@ class LoginController extends Controller
         ]);
 
         $user = User::where('email',$credit['email'])->first();
-        $status = Hash::check($credit['password'],$user->password);
-        dd($status);
-;        if( Auth::attempt($credit) ){
+        
+        
+        if( Auth::attempt($credit) ){
 
             $request->session()->regenerate();
 

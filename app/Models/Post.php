@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model{
 
+        protected $fillable = ['title', 'slug', 'excerpt', 'content', 'thumbnail', 'category_id', 'views', 'user_id'];
         protected $with = ['category', 'user'];
 
         public static function some(){
@@ -18,10 +19,10 @@ class Post extends Model{
         }
 
 
-        public function getRouteKeyName(){
+        // public function getRouteKeyName(){
 
-            return 'slug';
-          }
+        //     return 'slug';
+        //   }
     
 
 

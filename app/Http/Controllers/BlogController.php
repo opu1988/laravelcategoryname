@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Post;
@@ -29,7 +29,7 @@ class BlogController extends Controller
             'posts' => Post::with('category', 'user')
                 ->where('title', 'like', '%' .$search. '%')
                 ->orWhere('content', 'like', '%' .$search. '%')
-                ->get(),
+                ->paginate(3),
             'title' => "Blog",
             // compact('posts')
         ]);
@@ -81,7 +81,7 @@ class BlogController extends Controller
         return view('pages.category', [
 
             'title' => $category->name,
-            'posts' => $category->posts
+            'posts' => $category->posts()->paginate(2)
         ]);
     }
 
@@ -90,7 +90,7 @@ class BlogController extends Controller
         return view ('pages.user-post', [
 
             'title' => $user->name,
-            'posts' => $user->posts
+            'posts' => $user->posts()->paginate(2)
 
             
         ]);
