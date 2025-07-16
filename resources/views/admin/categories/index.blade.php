@@ -19,12 +19,12 @@
                     @endif
                     <div class="row">
                       <div class="col">
-                        <h2 class="card-title">All Posts</h2>
+                        <h2 class="card-title">All Categories</h2>
                       </div>
                       <div class="col">
-                          <form class="ml-auto search-form d-none d-md-block" method="GET" action="{{ route('admin-posts') }}">
+                          <form class="ml-auto search-form d-none d-md-block" method="GET" action="{{ route('posts.index') }}">
                             <div class="form-group">
-                              <input type="search" name="search" value="{{ $keyword }}" class="form-control" placeholder="Search from posts">
+                              <input type="search" name="search" value="{{ $keyword }}" class="form-control" placeholder="Search from categories">
                             </div>
                           </form>
                       </div>
@@ -37,31 +37,24 @@
                       <thead>
                         <tr>
                           <th>Post ID</th>
-                          <th>Thumbnail</th>
-                          <th> Post Title </th>
-                          <th> Post Categories </th>
-                          <th> Post Author </th>
+                          <th> Category Name </th>
+                          <th> Category Slug </th>
                           <th> Updated On </th>
                           <th> <> </th>
                         </tr>
                       </thead>
                       <tbody>
 
-                    @foreach($posts->all() as $post)
+                    @foreach($categories->all() as $category)
                         <tr>
-                          <td>{{ $post->id }}</td>  
-                          <td class="py-1">
-                            <img class="thumb-image" src="{{ route('home') }}/storage/images/{{ $user->photo }}" alt="image" />
-                          </td>
-                          <td> {{ $post->title }} </td>
-                          <td>{{ $post->category->name }}</td>
+                          <td>{{ $category->id }}</td>  
+                          <td> {{ $category->name }} </td>
+                          <td> {{ $category->slug }} </td>
                           
-                          <td> {{ $post->user->name }} </td>
-                          
-                          <td> {{ date('F d, Y', strtotime($post->updated_at) ) }} </td>
-                          <td><a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-warning">Edit</a></td>
+                          <td> {{ date('F d, Y', strtotime($category->updated_at) ) }} </td>
+                          <td><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Edit</a></td>
                           <td>
-                            <form method="post" action="{{ route('admin.post.delete', $post->id) }}">
+                            <form method="post" action="{{ route('categories.destroy', $category->id) }}">
                               @csrf
                               @method('delete')
                               <button type="submit" class="btn btn-danger">Delete</button> 
@@ -72,7 +65,7 @@
                       </tbody>
                     </table>
 
-                    {{ $posts->links('vendor.pagination.bootstrap-5') }}
+                    {{ $categories->links('vendor.pagination.bootstrap-5') }}
                   </div>
                 </div>
               </div>

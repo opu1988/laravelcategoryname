@@ -47,7 +47,7 @@
                     @endif
                     <h2 class="title">Create an Account</h2>
                     <hr>
-                    <form method="post" action="{{ route('registerProcess') }}">
+                    <form method="post" action="{{ route('registerProcess') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             
@@ -73,7 +73,7 @@
                         @enderror
                         <div class="mb-3">
                             
-                            <input type="text" name="photo" class="form-control" value="{{ old('photo') }}" placeholder="Photo url">
+                            <input type="file" name="photo" class="form-control" value="{{ old('photo') }}" placeholder="Photo url">
                             
                         </div>
                         @error('photo')

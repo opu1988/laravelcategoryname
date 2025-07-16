@@ -19,7 +19,7 @@
                     @endif
                     <h4 class="card-title">Edit Post</h4>
                     <hr>
-                    <form class="forms-sample" method="POST" action="{{ route('admin.post.update', $post->id) }}">
+                    <form class="forms-sample" method="POST" action="{{ route('posts.update', $post->id) }}">
                       @csrf
                       @method('put')
                       <div class="form-group">

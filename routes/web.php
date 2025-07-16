@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -34,10 +35,10 @@ Route::get("/", [HomeController::class, 'home'])->name('home');
 
 
 
-Route::get("/about", function(){
+// Route::get("/about", function(){
 
-    return view('pages.about');
-});
+//     return view('pages.about');
+// });
 
 Route::get("/blog", [BlogController::class, 'index'])->name("blog");
 
@@ -48,61 +49,76 @@ Route::get("/blog-details", function(){
 
 
 
-Route::get("/portfolio", function(){
+// Route::get("/portfolio", function(){
 
-    return view('pages.portfolio');
-});
+//     return view('pages.portfolio');
+// });
 
-Route::get("/portfolio-details", function(){
+// Route::get("/portfolio-details", function(){
 
-    return view('pages.portfolio-details');
-});
+//     return view('pages.portfolio-details');
+// });
 
-Route::get("/service", function(){
+// Route::get("/service", function(){
 
-    return view('pages.service');
-});
+//     return view('pages.service');
+// });
 
-Route::get("/service-details", function(){
+// Route::get("/service-details", function(){
 
-    return view('pages.service-details');
-});
+//     return view('pages.service-details');
+// });
 
 
 
-Route::get("/contact", function(){
+// Route::get("/contact", function(){
 
-    return view('pages.contact');
-});
+//     return view('pages.contact');
+// });
 
-Route::get("/services", function(){
+// Route::get("/services", function(){
 
-    return veiw('pages.services');
-});
+//     return veiw('pages.services');
+// });
 
 
 //Post Controller 
 
-Route::get("/admin/posts", [PostController::class, 'index'])->name('admin-posts');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
-Route::get("/admin/posts/create", [PostController::class, 'create'])->name('admin.post.create');
+    // Route::get("posts", [PostController::class, 'index'])->name('admin-posts');
 
-Route::post('/admin/posts/store', [PostController::class, 'store'])->name('admin.post.store');
+    // Route::get("posts/create", [PostController::class, 'create'])->name('admin.post.create');
 
-Route::get("/admin/posts/edit/{post}", [PostController::class, 'edit'])->name('admin.post.edit');
+    // Route::post('posts/store', [PostController::class, 'store'])->name('admin.post.store');
 
-Route::put('/admin/posts/update/{post}', [PostController::class, 'update'])->name('admin.post.update');
+    // Route::get("posts/edit/{post}", [PostController::class, 'edit'])->name('admin.post.edit');
 
-
-
-Route::delete("/admin/posts/delete/{post}", [PostController::class, 'destroy'])->name('admin.post.delete');
+    // Route::put('posts/update/{post}', [PostController::class, 'update'])->name('admin.post.update');
 
 
-Route::get('/test-upload', function(){
+
+    // Route::delete("posts/delete/{post}", [PostController::class, 'destroy'])->name('admin.post.delete');
+
+    Route::resources([
 
 
-    return view('upload-image');
+        'posts' => PostController::class,
+        'categories' => CategoryController::class
+    ]);
+
+    
+
 });
+
+
+
+
+// Route::get('/test-upload', function(){
+
+
+//     return view('upload-image');
+// });
 
 Route::post('test-upload', function(Request $request){
 

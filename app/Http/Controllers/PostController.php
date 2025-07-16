@@ -22,7 +22,7 @@ class PostController extends Controller
         ->orderBy('id', 'desc')->paginate(5);
 
 
-        return view('admin.posts',[
+        return view('admin.posts.posts',[
     
             'posts' => $posts,
             'keyword' => $keyword,
@@ -39,7 +39,7 @@ class PostController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.create-post', [
+        return view('admin.posts.create-post', [
 
 
             'categories' => $categories,
@@ -84,9 +84,11 @@ class PostController extends Controller
 
         $post->save();
 
+        
 
 
-        return redirect()->route('admin-posts')->with('message', 'Post has been Published');
+
+        return redirect()->route('posts.index')->with('message', 'Post has been Published');
 
 
     }
@@ -107,7 +109,7 @@ class PostController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.edit-post', [
+        return view('admin.posts.edit-post', [
 
 
             'post' => $post,

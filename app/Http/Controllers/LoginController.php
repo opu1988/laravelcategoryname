@@ -29,17 +29,33 @@ class LoginController extends Controller
 
             'name' => 'required|max:200',
             'username' => 'required',
-            'photo' => 'required',
+            'photo' => 'required|image|mimes:jpg, png',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6'
         ]);
 
         // $user = $this->generate($info);
 
+        $user = new User;
+
+        $user->name = $request->name;
+
+        $user->username = $request->username;
+
+        $photo_name = time() . '-' . $request->file('photo')->hashName();
+        $request->file('photo')->storeAs('/public/images', $photo_name);
+
+        $user->photo = $photo_name;
+
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+
+        
         
 
-        if($user = User::create($info)){
+        if( $user->save() ){
 
+            
             Auth::login($user);
             return redirect('/dashboard')->with('message', 'Registration Successfully');
         }

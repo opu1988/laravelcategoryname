@@ -3,7 +3,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="{{asset( '/admin/assets/images/faces/face8.jpg') }}" alt="profile image">
+                  <img class="img-xs rounded-circle" src="{{ route('home') }}/storage/images/{{ auth()->user()->photo }}" alt="{{ auth()->user()->name }}">
                   <div class="dot-indicator bg-success"></div>
 
                   
@@ -31,13 +31,13 @@
               <div class="collapse" id="ui-posts">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin-posts') }}">All Post</a>
+                    <a class="nav-link" href="{{ route('posts.index') }}">All Post</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.post.create') }}">Create Post</a>
+                    <a class="nav-link" href="{{ route('posts.create') }}">Create Post</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/ui-features/typography.html">Categories</a>
+                    <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
                   </li>
                 </ul>
               </div>

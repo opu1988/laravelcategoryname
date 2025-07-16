@@ -22,7 +22,7 @@
                     
                     <h4 class="card-title">Create post</h4>
                     <hr>
-                    <form class="forms-sample" method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="{{ route('posts.create') }}" enctype="multipart/form-data">
                       @csrf
             
                       <div class="form-group">
