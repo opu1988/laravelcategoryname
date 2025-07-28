@@ -17,7 +17,7 @@ class CategoryController extends Controller
         $title = "All Categories";
         $categories = Category::where('name', 'like', '%'.$keyword.'%')
             ->orwhere('slug', 'like', '%' .$keyword. '%')
-            ->orderBy('id', 'asc')->paginate(5);
+            ->orderBy('id', 'desc')->paginate(5);
 
         return view('admin.categories.index', compact('keyword', 'categories'));
     }
@@ -35,7 +35,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $category = new Category;
+        $category->name = $request->category_name;
+
+        $category->slug = strtolower( implode( '-', explode (' ', $request->category_name) ) );
+
+        if( $category->save() ){
+
+            return back()->with('message', 'category has been saved');
+        }
     }
 
     /**
@@ -51,7 +60,17 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.categories.edit');
+
+        $keyword = request('search');
+        $title = "Edit Categories";
+        $current_category = Category::firstWhere('id', $id);
+
+        $categories = Category::where('name', 'like', '%'.$keyword.'%')
+            ->orwhere('slug', 'like', '%' .$keyword. '%')
+            ->orderBy('id', 'desc')->paginate(5);
+
+
+        return view('admin.categories.edit', compact('keyword', 'title', 'categories', 'current_category'));
     }
 
     /**
@@ -59,7 +78,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::firstWhere('id', $id);
+
+        $category->name = $request->category_name;
+
+        $category->slug = strtolower(implode('-', explode (' ', $request->category_slug) ) );
+
+        $category->save();
+
+        return back()->with('message', 'Category has been updated successfully');
     }
 
     /**
@@ -67,6 +94,14 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::firstWhere('id', $id);
+
+        $category->delete();
+
+        $category->posts()->update(['category_id' => 22]);
+
+        return redirect()->route('categories.index')->with('message', 'Category has been removed!');
+
+        
     }
 }

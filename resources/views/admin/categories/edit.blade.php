@@ -19,17 +19,22 @@
                      @endif
                     <div class="row">
                       <div class="col">
-                        <h2 class="card-title">Add new Category</h2>
+                        <h2 class="card-title">{{ $title }}</h2>
                       </div>
                       
                     </div>
 
                     <div class="category-form">
-                      <form action="{{ route('categories.store') }}" method="POST">
+                      <form action="{{ route('categories.update', $current_category->id) }}" method="POST">
                         @csrf
-                        <input class="form-control mb-2" type="text" name="category_name" placeholder="category Name">
+                        @method('put')
+                        <label for="category_name">Category Name</label>
+                        <input class="form-control mb-2" id="category_name" type="text" name="category_name" value="{{ $current_category->name }}" placeholder="category Name">
+
+                        <label for="category_slug">Category Slug</label>
+                        <input class="form-control mb-2" id="category_slug" type="text" name="category_slug" value="{{ $current_category->slug }}" placeholder="category Slug">
                         <button type="submit" class="btn btn-primary">
-                          Create Category
+                          Update Category
                         </button>
                       </form>
                     </div>
@@ -76,40 +81,40 @@
                           <td> {{ $category->name }} </td>
                           <td><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Edit</a></td>
                           <td>
-                             <form method="post" action="{{ route('categories.destroy', $category->id) }}">
-                                @csrf
-                                @method('delete')
+                            <form method="post" action="{{ route('categories.destroy', $category->id) }}">
+                              @csrf
+                              @method('delete')
 
 
-                              <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#categoryModal{{ $category->id }}">
-                                Delete
-                              </button>
+                             <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                              Delete
+                            </button>
 
 
-                            <!-- Modal -->
-                              <div class="modal fade" id="categoryModal{{ $category->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Remove Category: {{ $category->name }}</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                      Are you sure you want to remove this? 
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                      <button type="submit" class="btn btn-danger">Yes</button> 
-                                    </div>
+                           <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Remove Category: {{ $category->name }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure you want to remove this? 
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-danger">Yes</button> 
                                   </div>
                                 </div>
                               </div>
+                            </div>
 
 
-                                
+                              
                             </form>
                           </td>
                         </tr>

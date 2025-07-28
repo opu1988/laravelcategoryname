@@ -22,7 +22,14 @@
                                 <div class="blog-meta">
                                     <ul>
                                         <li><a href="/users/{{ $post->user->username }}"><i class="fa fa-user-o"></i>{{ $post->user->name }}</a></li>
-                                        <li><a href="/category/{{ $post->category->slug }}"><i class="fa fa-bookmark-o"></i>{{ $post->category->name }}</a></li>
+                                        <li>
+                                            @if( isset($post->category) ) :
+                                            <a href="/category/{{ $post->category->slug }}">
+                                                <i class="fa fa-bookmark-o"></i>
+                                                     {{ $post->category->name }}
+                                            </a>
+                                            @endif
+                                        </li>
                                     </ul>
                                 </div>
                                 <h3 class="title"><a href="{{ route('single-post', $post->slug) }}">{{ $post->id }}. {{ $post->title }}</a></h3>
