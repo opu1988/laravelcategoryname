@@ -98,7 +98,16 @@
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                      Are you sure you want to remove this? 
+                                      <p>Assign new category for posts of this category</p>
+                                      <select name="new_category" class="form-control">
+                                        @foreach( App\Models\Category::where('id', '!=',  $category->id)->get() as $all_cat)
+                                        <option value="{{ $all_cat->id }}">{{ $all_cat->name }}</option>
+                                        @endforeach
+                                      </select>
+                                      <!-- <div class="mt-3">
+                                           Are you sure you want to remove this?
+                                      </div> -->
+                                     
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

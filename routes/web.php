@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -104,7 +105,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
 
         'posts' => PostController::class,
-        'categories' => CategoryController::class
+        'categories' => CategoryController::class,
+        'users' => UserController::class
     ]);
 
     

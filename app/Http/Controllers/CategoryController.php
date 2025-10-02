@@ -19,7 +19,9 @@ class CategoryController extends Controller
             ->orwhere('slug', 'like', '%' .$keyword. '%')
             ->orderBy('id', 'desc')->paginate(5);
 
-        return view('admin.categories.index', compact('keyword', 'categories'));
+        $all_cats = Category::all();
+
+        return view('admin.categories.index', compact('keyword', 'categories', 'all_cats'));
     }
 
     /**
@@ -94,11 +96,15 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        $new_category = request('new_category');
+
         $category = Category::firstWhere('id', $id);
 
         $category->delete();
 
-        $category->posts()->update(['category_id' => 22]);
+        // $category->posts()->update(['category_id' => 22]);
+
+        $category->posts()->update(['category_id' => $new_category]);
 
         return redirect()->route('categories.index')->with('message', 'Category has been removed!');
 

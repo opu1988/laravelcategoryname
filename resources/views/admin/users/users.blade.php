@@ -19,7 +19,7 @@
                     @endif
                     <div class="row">
                       <div class="col">
-                        <h2 class="card-title">All Posts</h2>
+                        <h2 class="card-title">All Users</h2>
                       </div>
                       <div class="col">
                           <form class="ml-auto search-form d-none d-md-block" method="GET" action="{{ route('posts.index') }}">
@@ -36,32 +36,30 @@
                     <table class="table table-striped mb-3">
                       <thead>
                         <tr>
-                          <th>Post ID</th>
+                          <th>User id</th>
                           <th>Thumbnail</th>
-                          <th> Post Title </th>
-                          <th> Post Categories </th>
-                          <th> Post Author </th>
-                          <th> Updated On </th>
+                          <th> Name </th> 
+                          <th> User Name </th>
+                          <th> Email </th>
                           <th> <> </th>
                         </tr>
                       </thead>
                       <tbody>
 
-                    @foreach($posts->all() as $post)
+                    @foreach($users->all() as $user)
                         <tr>
-                          <td>{{ $post->id }}</td>  
+                          <td>{{ $user->id }}</td> 
                           <td class="py-1">
-                            <img class="thumb-image" src="{{ route('home') }}/storage/images/{{ $post->thumbnail }}" alt="image" />
+                            <img class="thumb-image" src="{{ route('home') }}/storage/images/{{ $user->photo }}" alt="image" />
                           </td>
-                          <td> {{ $post->title }} </td>
-                          <td>{{ $post->category->name ?? 'Uncategorized' }}</td>
+                          <td> {{ $user->name }} </td>
+                          <td>{{ $user->username }}</td>
                           
-                          <td> {{ $post->user->name }} </td>
+                          <td> {{ $user->email }} </td>
                           
-                          <td> {{ date('F d, Y', strtotime($post->updated_at) ) }} </td>
-                          <td><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a></td>
+                          <td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a></td>
                           <td>
-                            <form method="post" action="{{ route('posts.destroy', $post->id) }}">
+                            <form method="post" action="{{ route('users.destroy', $user->id) }}">
                               @csrf
                               @method('delete')
                               <button type="submit" class="btn btn-danger">Delete</button> 
@@ -72,7 +70,7 @@
                       </tbody>
                     </table>
 
-                    {{ $posts->links('vendor.pagination.bootstrap-5') }}
+                    {{ $users->links('vendor.pagination.bootstrap-5') }}
                   </div>
                 </div>
               </div>
